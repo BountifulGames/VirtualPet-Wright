@@ -38,19 +38,19 @@ public class Pet
     public int Hunger
     {
         get { return hunger; }
-        set { Mathf.Clamp(value, 0, 100); }
+        set { hunger = Mathf.Clamp(value, 0, 100); }
     }
 
     public int Happiness
     {
         get { return happiness; }
-        set { Mathf.Clamp(value, 0, 100); }
+        set { happiness = Mathf.Clamp(value, 0, 100); }
     }
 
     public int Energy
     {
         get { return energy; }
-        set { Mathf.Clamp(value, 0, 100); }
+        set { energy = Mathf.Clamp(value, 0, 100); }
     }
 
     public Pet(string name) //Initialize pet object with base values and the name provided
@@ -60,7 +60,5 @@ public class Pet
         Happiness = 100;
         Energy = 100;
     }
-
-
 
 }
