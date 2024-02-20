@@ -383,6 +383,7 @@ MonoBehaviour:
   feedButton: {fileID: 720381434}
   playButton: {fileID: 569916117}
   restButton: {fileID: 1875420215}
+  newPetButton: {fileID: 0}
   submitBackground: {fileID: 926633561}
   petBackground: {fileID: 655000509}
   nameText: {fileID: 975864556}
