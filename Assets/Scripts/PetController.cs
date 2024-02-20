@@ -10,6 +10,7 @@ public class PetController : MonoBehaviour
     [SerializeField] private GameObject feedButton;
     [SerializeField] private GameObject playButton;
     [SerializeField] private GameObject restButton;
+    [SerializeField] private GameObject newPetButton;
     [SerializeField] private GameObject submitBackground;
     [SerializeField] private GameObject petBackground;
     [SerializeField] private TMP_Text nameText;
@@ -90,7 +91,33 @@ public class PetController : MonoBehaviour
         myPet.Happiness -= 1;
 
         Debug.Log("Time Passes:");
-        UpdateText();
+
+        if (CheckGameOver())
+        {
+            GameOver();
+        }
+        else
+        {
+            UpdateText();
+        }
+    }
+
+    private bool CheckGameOver()
+    {
+        if (myPet.Hunger > 100 || myPet.Happiness < 0 || myPet.Hunger < 0)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    private void GameOver()
+    {
+        StopCoroutine(PassingTime());
+        nameText.text = "You Failed";
+        newPetButton.SetActive(true);
     }
 
     IEnumerator PassingTime()
