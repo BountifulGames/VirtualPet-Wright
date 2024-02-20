@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PetController : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PetController : MonoBehaviour
     [SerializeField] private TMP_Text hungerText;
 
     private Pet myPet;
-    private float timeInterval = 2f;
+    private float timeInterval = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +62,11 @@ public class PetController : MonoBehaviour
         UpdateText();
     }
 
+    public void OnNewPetButtonPress()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     private void SubmitButtonUpdate()
     {
         if (nameInput.text.ToString() != "")
@@ -76,7 +82,7 @@ public class PetController : MonoBehaviour
 
     private void UpdateText()
     {
-        nameText.text = myPet.name;
+        nameText.text = myPet.Name;
         energyText.text = "Energy: " + myPet.Energy.ToString();
         happinessText.text = "Happiness: " + myPet.Happiness.ToString();
         hungerText.text = "Hunger: " + myPet.Hunger.ToString();
@@ -88,7 +94,7 @@ public class PetController : MonoBehaviour
 
         myPet.Energy -= 1;
 
-        myPet.Happiness -= 1;
+        myPet.Happiness -= 3 ;
 
         Debug.Log("Time Passes:");
 
@@ -104,7 +110,7 @@ public class PetController : MonoBehaviour
 
     private bool CheckGameOver()
     {
-        if (myPet.Hunger > 100 || myPet.Happiness < 0 || myPet.Hunger < 0)
+        if (myPet.Hunger >= 100 || myPet.Happiness <= 0 || myPet.Hunger <= 0)
         {
             return true;
         } else
@@ -120,11 +126,40 @@ public class PetController : MonoBehaviour
         newPetButton.SetActive(true);
     }
 
+    public void CheckThreshold()
+    {
+        if (myPet.Happiness < 15)
+        {
+            happinessText.color = Color.red;
+        } else
+        {
+            happinessText.color = Color.black;
+        }
+
+        if (myPet.Energy < 15)
+        {
+            energyText.color = Color.red;
+        }
+        else
+        {
+            energyText.color = Color.black;
+        }
+
+        if (myPet.Hunger > 85)
+        {
+            hungerText.color = Color.red;
+        } else
+        {
+            hungerText.color = Color.black;
+        }
+    }
+
     IEnumerator PassingTime()
     {
         while (true)
         {
             PetTimePassing();
+            CheckThreshold();
             yield return new WaitForSeconds(timeInterval);
         }
     }
