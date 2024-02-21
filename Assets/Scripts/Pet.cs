@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Pet
 {
-    private string name;
-    private int hunger;
-    private int happiness;
-    private int energy;
+    public string name;
+    public int hunger;
+    public int happiness;
+    public int energy;
 
     public void Feed()
     {

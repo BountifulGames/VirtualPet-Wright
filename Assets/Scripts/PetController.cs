@@ -110,7 +110,7 @@ public class PetController : MonoBehaviour
 
     private bool CheckGameOver()
     {
-        if (myPet.Hunger >= 100 || myPet.Happiness <= 0 || myPet.Hunger <= 0)
+        if (myPet.Hunger >= 100 || myPet.Energy == 0 || myPet.Hunger == 0)
         {
             return true;
         } else
