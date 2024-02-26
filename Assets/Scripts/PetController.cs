@@ -4,8 +4,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Vitual Pet
+//Name: Hunter Wright
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 2/26/2024
+/////////////////////////////////////////////
+
 public class PetController : MonoBehaviour
 {
+    //All the object I need access to in the Inspector
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private GameObject submitButton;
     [SerializeField] private GameObject feedButton;
@@ -34,7 +43,7 @@ public class PetController : MonoBehaviour
         SubmitButtonUpdate();
     }
 
-    public void OnSubmitButtonPress()
+    public void OnSubmitButtonPress() //Code that runs when you hit the submit button, such as changing background panels and creating a new Pet with the name provided 
     {
         submitBackground.SetActive(false);
         petBackground.SetActive(true);
@@ -45,7 +54,7 @@ public class PetController : MonoBehaviour
 
         StartCoroutine(PassingTime());
     }
-
+    //Code for running the various button presses, such as Feed, Rest, or Play
     public void OnFeedButtonPress()
     {
         myPet.Feed();
@@ -62,12 +71,12 @@ public class PetController : MonoBehaviour
         UpdateText();
     }
 
-    public void OnNewPetButtonPress()
+    public void OnNewPetButtonPress() //If you fail, you can create a new pet
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void SubmitButtonUpdate()
+    private void SubmitButtonUpdate() //Code for checking if there is anything in the input field to activate the button
     {
         if (nameInput.text.ToString() != "")
         {
@@ -80,7 +89,7 @@ public class PetController : MonoBehaviour
     }
 
 
-    private void UpdateText()
+    private void UpdateText() //Code for updating the pet's stats
     {
         nameText.text = myPet.Name;
         energyText.text = "Energy: " + myPet.Energy.ToString();
@@ -88,7 +97,7 @@ public class PetController : MonoBehaviour
         hungerText.text = "Hunger: " + myPet.Hunger.ToString();
     }
 
-    private void PetTimePassing()
+    private void PetTimePassing() //Code that runs every half second to change the pet's stats, then checks if any meets the game over requirements
     {
         myPet.Hunger += 1;
 
@@ -96,7 +105,7 @@ public class PetController : MonoBehaviour
 
         myPet.Happiness -= 3 ;
 
-        Debug.Log("Time Passes:");
+        //Debug.Log("Time Passes:");
 
         if (CheckGameOver())
         {
@@ -108,7 +117,7 @@ public class PetController : MonoBehaviour
         }
     }
 
-    private bool CheckGameOver()
+    private bool CheckGameOver() //Runs an if statement that checks if anything of the pets stats are at the limit
     {
         if (myPet.Hunger >= 100 || myPet.Energy == 0 || myPet.Hunger == 0)
         {
@@ -119,14 +128,14 @@ public class PetController : MonoBehaviour
         }
     }
 
-    private void GameOver()
+    private void GameOver() //GameOver code, stops coroutine and changes text to reflect
     {
         StopCoroutine(PassingTime());
         nameText.text = "You Failed";
         newPetButton.SetActive(true);
     }
 
-    public void CheckThreshold()
+    public void CheckThreshold() //Changes the color of the stat that is near it's threshold to red so that the player can notice and act
     {
         if (myPet.Happiness < 15)
         {
@@ -154,7 +163,7 @@ public class PetController : MonoBehaviour
         }
     }
 
-    IEnumerator PassingTime()
+    IEnumerator PassingTime() //Coroutine to pass the time, runs every half second
     {
         while (true)
         {

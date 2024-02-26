@@ -1,8 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Pet
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Vitual Pet
+//Name: Hunter Wright
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 2/26/2024
+/////////////////////////////////////////////
+public class Pet //Pet class with the variables for name, hunger, happiness, and energy. Can be called by the PetController
 {
     public string name;
     public int hunger;
@@ -28,7 +34,7 @@ public class Pet
         Energy -= 10;
     }
 
-    //Getters and setters for the values of the pet object
+    //Getters and setters for the values of the pet object, makes sure to clamp values between 0 and 100
     public string Name
     {
         get { return name; }
